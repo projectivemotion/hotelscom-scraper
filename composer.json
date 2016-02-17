@@ -13,5 +13,8 @@
     "psr-4": {
       "projectivemotion\\" : "src/"
     }
+  },
+  "require": {
+    "atofighi/phpquery": "2.0.1"
   }
 }

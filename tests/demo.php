@@ -22,7 +22,7 @@ foreach($autoload_files as $autoload_file)
 $HotelsCom  =   new \projectivemotion\HotelsComScrapper();
 $HotelsCom->curl_verbose    =   false;
 $HotelsCom->use_cache   =   $argv[1] == '1';
-$HotelsCom->setHotelFilter('Emporio');
+//$HotelsCom->setHotelFilter('Emporio');
 $result = false;
 
 $stdout = fopen('php://stdout', 'w+');
@@ -46,11 +46,23 @@ do{
 
     if(false === $result) break;
 
-    $hotels = $HotelsCom->getHotels($result);
+    $hotels =   array();
+    $parse_result   =   $HotelsCom->getHotels($result, function ($hoteldata, $pagenumber) use (&$hotels, $HotelsCom, $stdout){
+        $total_payment  =   $HotelsCom->getHotelBookingPrice($hoteldata);
+        $hotelinfo  =   array('name'  => $hoteldata->name,
+            'image' => $hoteldata->thumbnailUrl, 'stars' => $hoteldata->starRating,
+            'price-pernight' => $hoteldata->ratePlan->price->exactCurrent,
+            'booking-url' => $hoteldata->urls->pdpDescription,
+            'checkout-price' => $total_payment[0],
+            'checkout-currency' =>  $total_payment[1]);
+        fputcsv($stdout, $hotelinfo);
+        if($pagenumber > 1)
+            return false;
+        return true;
+    });
 
-    foreach($hotels as $h){
-        fputcsv($stdout, $h);
-    }
+    if(false === $parse_result)
+        break;
 
 }while($HotelsCom->hasMorePages($result) && $HotelsCom->gotoNextPage($result));
 

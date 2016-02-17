@@ -34,6 +34,16 @@ class HotelsComScrapper extends BaseScrapper
         return (object)$data;
     }
 
+    /**
+     * Call this to initialize the search.
+     *
+     * @param $city_country
+     * @param $checkin
+     * @param $checkout
+     * @param string $currencyCode
+     * @return object
+     * @throws Exception
+     */
     public function doSearchInit($city_country, $checkin, $checkout, $currencyCode = 'EUR')
     {
         $this->hotelSetCurrency($currencyCode);
@@ -44,6 +54,13 @@ class HotelsComScrapper extends BaseScrapper
         return $this->processResults($response);
     }
 
+    /**
+     * After calling doSearchInit, pass the result to this.
+     * This function will take the nextPage url from the results object and fetch the next page.
+     *
+     * @param $data
+     * @return object
+     */
     public function doSearch($data)
     {
         // go to next page
@@ -101,20 +118,61 @@ class HotelsComScrapper extends BaseScrapper
         return json_decode($response);
     }
 
+    public function logParsError($doc, $filename, $error)
+    {
+        file_put_contents($filename, $doc);
+        throw new \Exception($error);
+    }
+
+    public function getHotelBookingPrice($hoteldata)
+    {
+        $url    =   $hoteldata->urls->pdpDescription;
+        $page   =   $this->cache_get($url);
+
+        $doc    =   \phpQuery::newDocument($page);
+
+        $form   =   $doc['.rateplan:first form'];
+
+        if($form->length < 1)
+            $this->logParsError($page, 'hotelpage.html', "Unable to find submit form: $url");
+
+        $form_action    =   $form->attr('action');
+        $form_input     =   $form->find('input');
+
+        $post_data  =   array();
+
+        foreach($form_input as $input)
+        {
+            $qel    =   pq($input);
+            $post_data[$qel->attr('name')]    =   $qel->val();
+        }
+
+        $checkout_page  =   $this->cache_get($form_action, $post_data);
+        $m  =   preg_match('#"totalPaymentAmount":\s*"([^"]*?)"#', $checkout_page, $matches);
+
+        if(!$m)
+            $this->logParsError($checkout_page, 'checkout-page.html', 'Could not find Total Payment Amount.');
+
+        list($amount, $currency)    =   explode(',', $matches[1]);
+
+        return array($amount, $currency);
+    }
+
     /**
      * Return some basic hotel info.
      *
      * @param $data
      * @return array
      */
-    public function getHotels($data)
+    public function getHotels($data, $callback)
     {
-        $hotels =   array();
         foreach($data->results->results as $hoteldata)
         {
-            $hotels[$hoteldata->id] =   array('name'  => $hoteldata->name, 'image' => $hoteldata->thumbnailUrl, 'stars' => $hoteldata->starRating, 'price' => $hoteldata->ratePlan->price->exactCurrent);
+                if(false == $callback($hoteldata, $data->results->pagination->currentPage))
+                    return false;
+
         }
-        return $hotels;
+        return true;
     }
 
     public function setHotelFilter($HotelFilter)
