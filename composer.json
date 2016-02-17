@@ -1,0 +1,17 @@
+{
+  "name": "projectivemotion/HotelsComScrapper",
+  "description": "PHP Class used for scraping hotels.com",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Amado Martinez",
+      "email": "amado@projectivemotion.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "projectivemotion\\" : "src/"
+    }
+  }
+}
