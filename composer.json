@@ -14,7 +14,14 @@
       "projectivemotion\\" : "src/"
     }
   },
+  "repositories": [
+    {
+      "url": "https://github.com/projectivemotion/PhpScraperTools",
+      "type": "git"
+    }
+  ],
   "require": {
+    "projectivemotion/PhpScraperTools": "dev-master",
     "atofighi/phpquery": "2.0.1"
   }
 }

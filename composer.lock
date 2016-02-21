@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "34124f0bea9c3501534b6ecd2f9ba62d",
-    "content-hash": "01a13ecd8a10fd20a1a95d14a33cf2c6",
+    "hash": "20455aa883d2ddcfc77e8c406e41a681",
+    "content-hash": "846efa0e3741e44bf52c78ea0d0e6ebf",
     "packages": [
         {
             "name": "atofighi/phpquery",
@@ -50,12 +50,40 @@
             "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
             "homepage": "https://github.com/ATofighi/phpQuery/",
             "time": "2015-11-10 17:41:36"
+        },
+        {
+            "name": "projectivemotion/PhpScraperTools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/projectivemotion/PhpScraperTools",
+                "reference": "fa4f9fbb6bf4959b856b3bce2e26dfa6e9d0b08d"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "projectivemotion\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Amado Martinez",
+                    "email": "amado@projectivemotion.com"
+                }
+            ],
+            "description": "PHP Curl Wrapper. Written specifically for scraping purposes.",
+            "time": "2016-02-21 09:07:42"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "projectivemotion/phpscrapertools": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

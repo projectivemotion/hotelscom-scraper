@@ -21,7 +21,7 @@ foreach($autoload_files as $autoload_file)
 
 $HotelsCom  =   new \projectivemotion\HotelsComScrapper();
 $HotelsCom->curl_verbose    =   false;
-$HotelsCom->use_cache   =   $argv[1] == '1';
+$HotelsCom->use_cache   =   ($argc > 1 && $argv[1] == '1');
 //$HotelsCom->setHotelFilter('Emporio');
 $result = false;
 

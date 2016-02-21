@@ -7,7 +7,7 @@ namespace projectivemotion;
  *
  * @author Amado Martinez <amado@projectivemotion.com>
  */
-class HotelsComScrapper extends BaseScrapper
+class HotelsComScrapper extends BaseScraper
 {
     protected $domain       =   'www.hotels.com';
     public $curl_verbose    =   false;
