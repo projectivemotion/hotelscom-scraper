@@ -20,8 +20,13 @@ foreach($autoload_files as $autoload_file)
 // end autoloader finder
 
 $HotelsCom  =   new \projectivemotion\HotelsComScrapper();
-$HotelsCom->curl_verbose    =   false;
-$HotelsCom->use_cache   =   ($argc > 1 && $argv[1] == '1');
+$HotelsCom->verboseOff();
+
+if($argc > 1 && $argv[1] == '1')
+    $HotelsCom->cacheOn();
+else
+    $HotelsCom->cacheOff();
+
 //$HotelsCom->setHotelFilter('Emporio');
 $result = false;
 

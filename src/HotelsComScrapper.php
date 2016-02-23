@@ -10,9 +10,6 @@ namespace projectivemotion;
 class HotelsComScrapper extends BaseScraper
 {
     protected $domain       =   'www.hotels.com';
-    public $curl_verbose    =   false;
-    public $use_cache       =   1;
-
     protected $HotelFilter  =   '';
 
     public function hotelSetCurrency($currencyCode)
