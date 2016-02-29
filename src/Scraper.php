@@ -1,13 +1,15 @@
 <?php
 
-namespace projectivemotion;
+namespace projectivemotion\HotelsComScraper;
+
+use projectivemotion\PhpScraperTools\BaseScraper;
 
 /**
  * Project: HotelsComScrapper
  *
  * @author Amado Martinez <amado@projectivemotion.com>
  */
-class HotelsComScrapper extends BaseScraper
+class Scraper extends BaseScraper
 {
     protected $domain       =   'www.hotels.com';
     protected $HotelFilter  =   '';
@@ -161,13 +163,12 @@ class HotelsComScrapper extends BaseScraper
      * @param $data
      * @return array
      */
-    public function getHotels($data, $callback)
+    public function getHotels($data)
     {
         foreach($data->results->results as $hoteldata)
         {
-                if(false == $callback($hoteldata, $data->results->pagination->currentPage))
-                    return false;
-
+            yield $hoteldata;
+            continue;
         }
         return true;
     }

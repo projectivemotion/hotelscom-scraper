@@ -19,7 +19,9 @@ foreach($autoload_files as $autoload_file)
 }
 // end autoloader finder
 
-$HotelsCom  =   new \projectivemotion\HotelsComScrapper();
+$demo_pages =   1;
+
+$HotelsCom  =   new \projectivemotion\HotelsComScraper\Scraper();
 $HotelsCom->verboseOff();
 
 if($argc > 1 && $argv[1] == '1')
@@ -27,23 +29,28 @@ if($argc > 1 && $argv[1] == '1')
 else
     $HotelsCom->cacheOff();
 
-//$HotelsCom->setHotelFilter('Emporio');
+//$HotelsCom->setHotelFilter('Hotel Félicien by Elegancia');
 $result = false;
 
-$stdout = fopen('php://stdout', 'w+');
 do{
     // initialize
     if($result == false)
     {
-        $result = $HotelsCom->doSearchInit('Cancun, Mexico','2016-03-10','2016-03-14');
+        $result = $HotelsCom->doSearchInit('Paris, France','2016-04-15','2016-04-19');
 
         if($result->hotel)
         {
             echo "Found Hotel: ", print_r($result->hotel), "\n";
-            $hotels = $HotelsCom->getHotels($result);
+            $hotels = $HotelsCom->getHotels($result, null);
 
-            print_r($hotels[$result->hotel->hotelId]);
-            break;
+            foreach($hotels as $hotelinfo)
+            {
+                if($hotelinfo->id == $result->hotel->hotelId)
+                {
+                    print_r($hotelinfo);
+                    break;
+                }
+            }
         }
     }else{
         $result = $HotelsCom->doSearch($result);
@@ -52,25 +59,32 @@ do{
     if(false === $result) break;
 
     $hotels =   array();
-    $parse_result   =   $HotelsCom->getHotels($result, function ($hoteldata, $pagenumber) use (&$hotels, $HotelsCom, $stdout){
-        $total_payment  =   $HotelsCom->getHotelBookingPrice($hoteldata);
-        $hotelinfo  =   array('name'  => $hoteldata->name,
-            'image' => $hoteldata->thumbnailUrl, 'stars' => $hoteldata->starRating,
-            'price-pernight' => $hoteldata->ratePlan->price->exactCurrent,
-            'booking-url' => $hoteldata->urls->pdpDescription,
-            'checkout-price' => $total_payment[0],
-            'checkout-currency' =>  $total_payment[1]);
-        fputcsv($stdout, $hotelinfo);
-        if($pagenumber > 1)
-            return false;
-        return true;
-    });
+    $parse_result   =   $HotelsCom->getHotels($result);
+
+    foreach($parse_result as $i => $hoteldata)
+    {
+        echo "$i => ";
+            $total_payment  =   $HotelsCom->getHotelBookingPrice($hoteldata);
+            $hotelinfo  =   array(
+                'name'              => $hoteldata->name,
+                'checkout-price'    => $total_payment[0],
+                'checkout-currency' =>  $total_payment[1],
+                'booking-url'       => $hoteldata->urls->pdpDescription,
+                'price-pernight'    => $hoteldata->ratePlan->price->exactCurrent,
+                'image'             => $hoteldata->thumbnailUrl, 'stars' => $hoteldata->starRating
+            );
+            print_r($hotelinfo);
+            if($result->results->pagination->currentPage > $demo_pages)
+            {
+                $parse_result = false;  // break out
+                break;
+            }
+    }
 
     if(false === $parse_result)
         break;
 
 }while($HotelsCom->hasMorePages($result) && $HotelsCom->gotoNextPage($result));
 
-fclose($stdout);
 echo 'done';
 

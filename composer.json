@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "projectivemotion\\" : "src/"
+      "projectivemotion\\HotelsComScraper\\" : "src/"
     }
   },
   "repositories": [
