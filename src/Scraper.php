@@ -170,7 +170,6 @@ class Scraper extends BaseScraper
             yield $hoteldata;
             continue;
         }
-        return true;
     }
 
     public function setHotelFilter($HotelFilter)
