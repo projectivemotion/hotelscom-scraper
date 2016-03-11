@@ -19,7 +19,7 @@ foreach($autoload_files as $autoload_file)
 }
 // end autoloader finder
 
-$demo_pages =   1;
+$demo_hotels =   5;
 
 $HotelsCom  =   new \projectivemotion\HotelsComScraper\Scraper();
 $HotelsCom->verboseOff();
@@ -32,11 +32,12 @@ else
 //$HotelsCom->setHotelFilter('Hotel Félicien by Elegancia');
 $result = false;
 
+$cur_hotelnumber    =   0;
 do{
     // initialize
     if($result == false)
     {
-        $result = $HotelsCom->doSearchInit('Paris, France','2016-04-15','2016-04-19');
+        $result = $HotelsCom->doSearchInit('Cancun, Mexico','2016-04-15','2016-04-19');
 
         if($result->hotel)
         {
@@ -74,7 +75,8 @@ do{
                 'image'             => $hoteldata->thumbnailUrl, 'stars' => $hoteldata->starRating
             );
             print_r($hotelinfo);
-            if($result->results->pagination->currentPage > $demo_pages)
+//            if($result->results->pagination->currentPage > $demo_hotels)
+            if(++$cur_hotelnumber > $demo_hotels)
             {
                 $parse_result = false;  // break out
                 break;

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "491bb0acb553f6950410a1fb68eb91ca",
-    "content-hash": "846efa0e3741e44bf52c78ea0d0e6ebf",
+    "hash": "c63389d2ff4672bf408ec5ffd5d8955c",
+    "content-hash": "026c3e21d5d7af686f09ee70faf4304f",
     "packages": [
         {
             "name": "atofighi/phpquery",
@@ -53,11 +53,11 @@
         },
         {
             "name": "projectivemotion/PhpScraperTools",
-            "version": "dev-master",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/projectivemotion/PhpScraperTools",
-                "reference": "b177b5407749ddfa867bee201a1c51eb09b64280"
+                "reference": "c47e418d966d229bc62ea855f9831aaedd06643a"
             },
             "type": "library",
             "autoload": {
@@ -75,15 +75,13 @@
                 }
             ],
             "description": "PHP Curl Wrapper. Written specifically for scraping purposes.",
-            "time": "2016-02-29 16:46:31"
+            "time": "2016-03-11 07:17:21"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "projectivemotion/phpscrapertools": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
