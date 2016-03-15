@@ -1,12 +1,15 @@
 {
-  "name": "projectivemotion/HotelsComScrapper",
+  "name": "projectivemotion/hotelscom-scraper",
   "description": "PHP Class used for scraping hotels.com",
   "minimum-stability": "stable",
   "license": "MIT",
+  "keywords": ["hotels.com", "scraper","planitour"],
   "authors": [
     {
       "name": "Amado Martinez",
-      "email": "amado@projectivemotion.com"
+      "email": "amado@projectivemotion.com",
+      "role": "Developer",
+      "homepage": "http://projectivemotion.com"
     }
   ],
   "autoload": {
@@ -14,14 +17,8 @@
       "projectivemotion\\HotelsComScraper\\" : "src/"
     }
   },
-  "repositories": [
-    {
-      "url": "https://github.com/projectivemotion/PhpScraperTools",
-      "type": "git"
-    }
-  ],
   "require": {
-    "projectivemotion/PhpScraperTools": "0.0.2",
+    "projectivemotion/php-scraper-tools": "0.1.*",
     "atofighi/phpquery": "2.0.1"
   }
 }

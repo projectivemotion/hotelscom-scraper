@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c63389d2ff4672bf408ec5ffd5d8955c",
-    "content-hash": "026c3e21d5d7af686f09ee70faf4304f",
+    "hash": "189dda0ebae1bf03d9edc1043ca5b8ad",
+    "content-hash": "527a41d7b0c971ff0b7c259834ae00d0",
     "packages": [
         {
             "name": "atofighi/phpquery",
@@ -52,12 +52,22 @@
             "time": "2015-11-10 17:41:36"
         },
         {
-            "name": "projectivemotion/PhpScraperTools",
-            "version": "0.0.2",
+            "name": "projectivemotion/php-scraper-tools",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/projectivemotion/PhpScraperTools",
-                "reference": "c47e418d966d229bc62ea855f9831aaedd06643a"
+                "url": "https://github.com/projectivemotion/php-scraper-tools.git",
+                "reference": "8df696054a1a6fc5eca2ce289f3fb3b350472405"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/projectivemotion/php-scraper-tools/zipball/8df696054a1a6fc5eca2ce289f3fb3b350472405",
+                "reference": "8df696054a1a6fc5eca2ce289f3fb3b350472405",
+                "shasum": ""
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "~1",
+                "phpunit/phpunit": "5.0.*"
             },
             "type": "library",
             "autoload": {
@@ -65,6 +75,7 @@
                     "projectivemotion\\PhpScraperTools\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -75,7 +86,7 @@
                 }
             ],
             "description": "PHP Curl Wrapper. Written specifically for scraping purposes.",
-            "time": "2016-03-11 07:17:21"
+            "time": "2016-03-15 08:15:07"
         }
     ],
     "packages-dev": [],
