@@ -47,6 +47,17 @@ $city_txt   =   $argv[2];
 $checkin    =   $argv[3];
 $checkout   =   $argv[4];
 
+printf(<<<HDOC
+Using Params:
+
+    cache:      $cache_on
+    city:       $city_txt
+    checkin:    $checkin
+    checkout:   $checkout
+    
+HDOC
+);
+
 $demo_hotels =   5;
 
 $HotelsCom  =   new \projectivemotion\HotelsComScraper\Scraper();
