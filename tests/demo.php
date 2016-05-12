@@ -42,8 +42,8 @@ foreach($autoload_files as $autoload_file)
 }
 // end autoloader finder
 
-function exception_error_handler($no, $str, $file, $line ) { throw new ErrorException($str, 0, $no, $file, $line); }
-set_error_handler("exception_error_handler");
+//function exception_error_handler($no, $str, $file, $line ) { throw new ErrorException($str, 0, $no, $file, $line); }
+//set_error_handler("exception_error_handler");
 
 assert_options(ASSERT_BAIL, 0);
 assert_options(ASSERT_WARNING, 0);
