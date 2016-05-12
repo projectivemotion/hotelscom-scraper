@@ -42,6 +42,16 @@ foreach($autoload_files as $autoload_file)
 }
 // end autoloader finder
 
+function exception_error_handler($no, $str, $file, $line ) { throw new ErrorException($str, 0, $no, $file, $line); }
+set_error_handler("exception_error_handler");
+
+assert_options(ASSERT_BAIL, 0);
+assert_options(ASSERT_WARNING, 0);
+assert_options(ASSERT_CALLBACK, function (){
+    print_r(func_get_args());
+    exit(1);
+});
+
 $cache_on   =   $argv[1] == '1';
 $city_txt   =   $argv[2];
 $checkin    =   $argv[3];
