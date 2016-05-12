@@ -50,9 +50,9 @@ class Scraper extends BaseScraper
         if(!$response)
             throw new Exception("Failed to get json response.");
 
-        if(isset($response->data->body->error))
+        if(isset($response->data->body->error->message))
         {
-            throw new \Exception($response->data->body->error);
+            throw new \Exception($response->data->body->error->message);
         }
 
         if(!isset($response->data->body->searchResults))

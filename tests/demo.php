@@ -78,6 +78,8 @@ if($cache_on)
 else
     $HotelsCom->cacheOff();
 
+$HotelsCom->verboseOn();
+
 //$HotelsCom->setHotelFilter('Hotel Félicien by Elegancia');
 $result = false;
 
