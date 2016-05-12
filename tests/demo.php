@@ -8,6 +8,24 @@
 if(!isset($argv))
     die("Run from command line.");
 
+if ($argc < 5)
+{
+    printf("Usage:\n\t%s [use-cache] [location] [checkin-date] [checkout-date]\n\n%s\n", $argv[0],
+<<<'DOC'
+Arguments:
+    use-cache:      0 or 1
+    location:       Cancun, Mexico
+    checkin-date:   2016-11-16
+    checkout-date:  2016-11-19
+    
+Examples:
+    $ php -f demo.php 1 "Cancun, Mexico" 2016-11-16 2016-11-19
+    $ php -f demo.php 1 "Madrid, Spain" $(date +%Y-%m-%d) $(date -d '5 days' +%Y-%m-%d)
+DOC
+
+);
+    exit;
+}
 // copied this from doctrine's bin/doctrine.php
 $autoload_files = array( __DIR__ . '/../vendor/autoload.php',
     __DIR__ . '/../../../autoload.php');
@@ -19,12 +37,17 @@ foreach($autoload_files as $autoload_file)
 }
 // end autoloader finder
 
+$cache_on   =   $argv[1] == '1';
+$city_txt   =   $argv[2];
+$checkin    =   $argv[3];
+$checkout   =   $argv[4];
+
 $demo_hotels =   5;
 
 $HotelsCom  =   new \projectivemotion\HotelsComScraper\Scraper();
 $HotelsCom->verboseOff();
 
-if($argc > 1 && $argv[1] == '1')
+if($cache_on)
     $HotelsCom->cacheOn();
 else
     $HotelsCom->cacheOff();
@@ -37,7 +60,7 @@ do{
     // initialize
     if($result == false)
     {
-        $result = $HotelsCom->doSearchInit('Cancun, Mexico','2016-04-15','2016-04-19');
+        $result = $HotelsCom->doSearchInit($city_txt, $checkin, $checkout);
 
         if($result->hotel)
         {
@@ -87,6 +110,4 @@ do{
         break;
 
 }while($HotelsCom->hasMorePages($result) && $HotelsCom->gotoNextPage($result));
-
-echo 'done';
 
