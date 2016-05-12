@@ -83,6 +83,9 @@ $HotelsCom->verboseOn();
 //$HotelsCom->setHotelFilter('Hotel Félicien by Elegancia');
 $result = false;
 
+// init home!
+$HotelsCom->initHome();
+
 $cur_hotelnumber    =   0;
 do{
     // initialize

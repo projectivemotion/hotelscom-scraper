@@ -14,6 +14,11 @@ class Scraper extends BaseScraper
     protected $domain       =   'www.hotels.com';
     protected $HotelFilter  =   '';
 
+    public function initHome()
+    {
+        $this->getCurl('/');
+    }
+
     public function hotelSetCurrency($currencyCode)
     {
         $response = $this->cache_get('http://www.hotels.com/change_currency.html?currency=' . $currencyCode);
