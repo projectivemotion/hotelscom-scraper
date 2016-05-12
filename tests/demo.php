@@ -10,8 +10,11 @@ if(!isset($argv))
 
 if ($argc < 5)
 {
-    printf("Usage:\n\t%s [use-cache] [location] [checkin-date] [checkout-date]\n\n%s\n", $argv[0],
+    printf(
 <<<'DOC'
+Usage:
+    %s [use-cache] [location] [checkin-date] [checkout-date]
+    
 Arguments:
     use-cache:      0 or 1
     location:       Cancun, Mexico
@@ -19,10 +22,12 @@ Arguments:
     checkout-date:  2016-11-19
     
 Examples:
-    $ php -f demo.php 1 "Cancun, Mexico" 2016-11-16 2016-11-19
-    $ php -f demo.php 1 "Madrid, Spain" $(date +%Y-%m-%d) $(date -d '5 days' +%Y-%m-%d)
-DOC
+    $ php -f %s 1 "Cancun, Mexico" 2016-11-16 2016-11-19
+    $ php -f %s 1 "Madrid, Spain" $(date +%%Y-%%m-%%d) $(date -d '5 days' +%%Y-%%m-%%d)
 
+DOC
+    , $argv[0], $argv[0]
+    , $argv[0]
 );
     exit;
 }

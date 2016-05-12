@@ -1,6 +1,7 @@
 # Hotelscom-Scraper
 Hotels.com Price Scraper
 
+[![Build Status](https://travis-ci.org/projectivemotion/hotelscom-scraper.svg?branch=master)](https://travis-ci.org/projectivemotion/hotelscom-scraper)
 
 ## Use at your own risk!
 * I am not responsible for your use of this software.
@@ -10,11 +11,35 @@ Hotels.com Price Scraper
 
 ### Installation
 
-> composer require projectivemotion/hotelscom-scraper
+Using Github:
+
+    $ git clone https://github.com/projectivemotion/hotelscom-scraper.git
+    $ cd hotelscom-scraper ; php -f tests/demo.php
+    
+Using Composer:
+
+    composer require projectivemotion/hotelscom-scraper
+
 
 ## Usage
 
-> php -f vendor/projectivemotion/hotelscom-scraper/tests/demo.php
+For an example see tests/demo.php!
+
+    $ php -f vendor/projectivemotion/hotelscom-scraper/tests/demo.php
+    Usage:
+        tests/demo.php [use-cache] [location] [checkin-date] [checkout-date]
+        
+    Arguments:
+        use-cache:      0 or 1
+        location:       City, Country
+        checkin-date:   YYYY-mm-dd Format
+        checkout-date:  YYYY-mm-dd Format
+        
+    Examples:
+        $ php -f tests/demo.php 1 "Cancun, Mexico" 2016-11-16 2016-11-19
+        $ php -f tests/demo.php 1 "Madrid, Spain" $(date +%Y-%m-%d) $(date -d '5 days' +%Y-%m-%d)
+
+
 
 # License
 The MIT License (MIT)
