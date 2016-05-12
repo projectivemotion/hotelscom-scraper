@@ -23,6 +23,11 @@ class Scraper extends BaseScraper
 
     public function processResults($response)
     {
+        if(!isset($response->data->body->searchResults))
+        {
+            var_dump($response);
+        }
+
         $data = array('response' => $response, 'hotel' => false, 'results' => $response->data->body->searchResults);
         if(isset($response->data->body->query->filters) && $response->data->body->query->filters->hotelId != '')
         {
