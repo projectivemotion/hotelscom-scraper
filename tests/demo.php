@@ -114,7 +114,8 @@ do{
     foreach($parse_result as $i => $hoteldata)
     {
         echo "$i => ";
-            $total_payment  =   $HotelsCom->getHotelBookingPrice($hoteldata);
+//            $total_payment  =   $HotelsCom->getHotelBookingPrice($hoteldata);
+            $total_payment = ['unknown', 'unknown'];    // booking price is broken
             $hotelinfo  =   array(
                 'name'              => $hoteldata->name,
                 'checkout-price'    => $total_payment[0],
