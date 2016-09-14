@@ -8,13 +8,18 @@ Hotels.com Price Scraper
 * Please do not abuse!
 * Please do not be stupid!
 
+## Requirements
+- Composer
+- PHP 5.3
 
 ### Installation
 
 Using Github:
 
     $ git clone https://github.com/projectivemotion/hotelscom-scraper.git
-    $ cd hotelscom-scraper ; php -f tests/demo.php
+    $ cd hotelscom-scraper
+    $ composer install
+    $ php -f tests/demo.php
     
 Using Composer:
 
