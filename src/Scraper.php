@@ -24,7 +24,7 @@ class Scraper extends BaseScraper
     public function processResults($response)
     {
         if(isset($response->data->body->error))
-            throw new \Exception($response->data->body->error->message);
+            throw new Exception($response->data->body->error->message);
 
         $data = array('response' => $response, 'hotel' => false, 'results' => $response->data->body->searchResults);
         if(isset($response->data->body->query->filters) && $response->data->body->query->filters->hotelId != '')
@@ -51,7 +51,7 @@ class Scraper extends BaseScraper
         $this->hotelSetCurrency($currencyCode);
         $response   =   $this->submit_search($city_country, $checkin, $checkout);
         if(!$response)
-            throw new Exception("FAiled to get json response.");
+            throw new Exception("Failed to get json response.");
 
         return $this->processResults($response);
     }
@@ -123,7 +123,7 @@ class Scraper extends BaseScraper
     public function logParsError($doc, $filename, $error)
     {
         file_put_contents($filename, $doc);
-        throw new \Exception($error);
+        throw new Exception($error);
     }
 
     public function getHotelBookingPrice($hoteldata)
